@@ -1,0 +1,192 @@
+- week 02
+
+    ## week01 보충 : Flutter의 특징
+
+    ### JIT(just-in-time)
+
+    - 브라우저에서 파일들을 다운로드 한 뒤에 한번 컴파일해서 브라우저 엔진이 실행할 수 있는 저수준 언어로 바꿔준 후 화면을 렌더링 하는 방식으로 실행 시점에 바이트코드를 기계어로 번역한다.
+        - 특징 :
+            - 소스코드가 서버에서 컴파일 되는것이 아닌 사용자의 브라우저에서 컴파일 되는 방식이라서 상대적으로 실행 속도가 느리다.
+            - 앱 설치 속도, 설치 용량 등이 AOT에 비해 빠르고 적게 차지한다.
+            - 브라우저에서 여러 에러들을 발생시키고 확인할 수 있으며 디버깅이 가능하다.
+            - CPU 사용이 AOT에 비해 높다.
+        - 예시
+            - Java에서 사용되는 JVM(Java Virtual Machine)
+            - C#에서 사용되는 CLR(Common Language Runtime)
+            - Python에서 사용되는 CPython
+
+    ### AOT(ahead-of-time)
+
+    - 소스 코드를 미리 컴파일하는 방식으로 설치 시점에 기계어로 번역한다.
+        - 특징
+            - 미리 컴파일을 해놓기 때문에 속도가 상대적으로 빠르다.
+            - 미리 컴파일을 해놓기 때문에 설치 속도나 설치 용량이 큰 편이다.
+            - CPU 사용이 JIT에 비해 낮다
+        - 예시
+            - C
+            - C++
+
+    ### Null safety
+
+    - 어떤 변수, 혹은 데이터가 null이 될수 있음을 명시하는 것
+
+        개발자가 null 값을 참조할 수 없게 하는 것으로,
+
+        Dart 컴파일러는 어떤 데이터가 null 일 때 참조하지 않도록 도와줌
+
+        즉, null safety 는 nullable 변수를 선언하는 것
+
+
+    # 02 다트를 알면 플러터가 보인다
+
+    ## 02-1 카멜로온 같은 언어, 다트!
+
+    - 다트 : 구글이 웹 프론트엔드 구현을 목적으로 개발한 프로그래밍 언어
+
+        다트는 어떻게 활용하느냐에 따라 서버나 웹, 앱을 만들 때 사용 가능
+
+
+    ### 다트 언어의 8가지 특징
+
+    1. 다트는 main() 함수로 시작합니다.
+    2. 다트는 어디에서나 변수를 선언하고 사용할 수 있습니다.
+    3. 다트에서는 모든 변수가 객체입니다.
+
+        그리고 모든 객체는 Object 클래스를 상속받습니다.
+
+    4. 다트는 자료형이 엄격한 언어입니다.
+
+        이 말은 변수에 지정한 자료형과 다른 유형의 값을 저장하면 오류가 발생한다는 의미입니다.
+
+        만약 여러 자료형을 허용하려면 dynamic 타입을 이용할 수 있습니다.
+
+    5. 다트는 제네릭 타입을 이용해 개발할 수 있습니다.
+
+        그리고 List<int>처럼 int형을 넣을 수도, List<dynamic>처럼 다양한 데이터를 넣을 수도 있습니다.
+
+    6. 다트는 public, protected 같은 키워드가 없습니다.
+
+        만약 외부로 노출하고 싶지 않다면 변수나 함수 이름 앞에 언더스코어(_)를 이용해 표시할 수 있습니다.
+
+    7. 변수나 함수의 시작은 언더스코어 또는 문자열로 시작하고 그 이후에 숫자를 입력할 수 있습니다.
+    8. 다트는 삼항 연산자를 사용할 수 있습니다.
+
+        아래 코드에서 isPublic이 참이면 “public”, 거짓이면 “private”를 반환하여 visibility에 지정합니다.
+
+        또 매개변수로 전달받은 name이 null이면 “Guest”를 반환하고, 아니면 매개변수로 전달 받은 값을 그대로 반환합니다.
+
+
+    ```dart
+    var visibility = isPublic ? 'public' : 'private';
+    String playerName(String name) => name ?? 'Guest';
+    ```
+
+    ### 간단한 코드로 다트의 특징 이해하기
+
+    ```dart
+    // 함수 정의
+    printInteger(int aNumber) {
+    	print('The number is $aNumber.'); // 콘솔에 출력
+    }
+
+    // main() 함수에서 시작
+    main() {
+    	var number = 42;      // 동적 타입 변수 지정
+    	// var : 자료형을 특정하지 않는 변수 선언(자료형 추론)
+    	printInteger(number); // 함수 호출
+    }
+    ```
+
+    ```dart
+    The number is 42.
+    ```
+
+    다트가 제공하는 주요 자료형
+
+    | 구분 | 자료형 | 설명 |
+    | --- | --- | --- |
+    | 숫자 | int | 정수형 숫자. 예 (1, -500, 0) |
+    | 숫자 | double | 실수형 숫자. 예 (3.14, -7.1) |
+    | 숫자 | num | 정수형 또는 실수형 숫자 |
+    | 분자열 | String | 텍스트 기반 문자 |
+    | 불리언 | bool | True나 False |
+    | 자료형 추론 | var | 입력받은 값에 따라 자료형 결정. 한 번 결정된 자료형은 변경 불가 |
+    | 자료형 추론 | dynamic | 입력받은 값에 따라 자료형 결정. 다른 변수 입력하면 자료형 변경 가능 |
+
+    ### 다트가 제공하는 키워드
+
+    | abstract | default | finally | mixin | switch |
+    | --- | --- | --- | --- | --- |
+    | as | defferred | for | new | sync |
+    | assert | do | Function | null | this |
+    | async | dynamic | get | on | throw |
+    | await | else | hide | operator | true |
+    | break | enum | if | part | try |
+    | case | export | implements | rethrow | typedef |
+    | catch | extends | import | return | var |
+    | class | external | in | set | void |
+    | const | factory | interface | show | while |
+    | continue | false | is | static | with |
+    | covariant | final | library | super | yield |
+
+    ## 02-2 비동기 처리 방식 알아보기
+
+    비동기(asyncchronous) : 언제 끝날지 모르는 작업을 기다리지 않고 다음 작업을 처리하게 하는 것
+
+    ![동기와 비동기 처리 방식 비교](https://images.velog.io/images/dorazi/post/dadf63e9-5994-4967-bc3f-ca0bc173897c/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202020-03-31%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%202.29.45.png)
+
+    동기와 비동기 처리 방식 비교
+
+    ### 비동기 프로세스의 작동 방식
+
+    다트는 async와 await 키워드를 이용해 비동기 처리를 구현
+
+    - 구현 방법
+    1. 함수 이름 뒤, 본문이 시작하는 중괄호 { 앞에 async 키워드를 붙여 비동기로 만든다.
+    2. 비동기 함수 안에서 언제 끝날지 모르는 작업 앞에 await 키워드를 붙인다.
+    3. 2번의 결과를 받기 위해 비동기 함수 이름 앞에 Future(값이 여러 개면 Stream) 클래스를 지정한다.
+
+    ```dart
+    void main() {
+    	checkVersion();
+    	print('end process');
+    }
+    Future checkVersion() async { // Future와 async : 함수를 비동기로 만들겠다는 의미
+    	var version = await lookUpVersion(); // await : 처리 완료후 결과 반환 시까지 처리 멈춤
+    	print(version);
+    }
+
+    int lookUpVersion() {
+    	return 12;
+    }
+    ```
+
+    ```dart
+    end process
+    12
+    ```
+
+    ### 비동기 함수가 반환하는 값 활용하기
+
+    ```dart
+    void main() async {
+    	await getVersionName.then((value) => {
+    		print(value)
+    	});
+    	print('end process');
+    }
+
+    Future<String> getVersionName() async {
+    	var versionName = await lookUpVersionName();
+    	return versionName;
+    }
+
+    String lookUpVersionName() {
+    	return 'Android Q';
+    }
+    ```
+
+    ```dart
+    Android Q
+    end process
+    ```
