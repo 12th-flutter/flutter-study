@@ -49,6 +49,15 @@ final List<Cat> cats = [
     replyCount: 1,
     created: DateTime(2022, 4, 23, 17, 32, 50, 725),
   ),
+  Cat(
+    id: "5",
+    name: "GwangJu",
+    title: "Pompompurin",
+    link: "assets/images/KLeague_06.jpg",
+    likeCount: 422,
+    replyCount: 3,
+    created: DateTime(2022, 4, 23, 17, 32, 50, 725),
+  ),
 ];
 
 class ListScreen extends StatefulWidget {
